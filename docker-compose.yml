@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  portainer:
+    image: portainer/portainer:1.22.2
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    ports:
+      - 9000:9000
+      - 8000:8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/data
+    networks:
+      - default
+
+### Network Docker ##################################
+networks:
+    default:
+      external:
+          name: docker_external
+
